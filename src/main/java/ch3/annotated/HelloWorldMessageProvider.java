@@ -1,10 +1,9 @@
-package ch3.annotation;
+package ch3.annotated;
 
 import ch2.MessageProvider;
-import org.springframework.stereotype.Component;
 
 //simple bean
-@Component("provider")
+//@Component("provider")
 public class HelloWorldMessageProvider implements MessageProvider {
 
     public String getMessage() {

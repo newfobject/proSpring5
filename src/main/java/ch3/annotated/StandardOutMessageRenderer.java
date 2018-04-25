@@ -1,4 +1,4 @@
-package ch3.annotation;
+package ch3.annotated;
 
 import ch2.MessageProvider;
 import ch2.MessageRenderer;
