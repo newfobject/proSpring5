@@ -1,15 +1,15 @@
 package ch3.annotated;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service("singer")
+@Component("johnMayer")
+@Trophy(name = {"grammy", "platinum disk"})
 public class Singer {
 
-    @Autowired
-    private Inspiration inspirationBean;
+    private String lyric = "I played a quick game of chess " +
+            "with the salt and pepper shaker";
 
     public void sing() {
-        System.out.println("... " + inspirationBean.getLyric());
+        System.out.println(lyric);
     }
 }

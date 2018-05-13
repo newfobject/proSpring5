@@ -49,4 +49,20 @@
             </list>
         </property>
     </bean>
+
+    <bean id="singer" class="ch3.Singer" scope="prototype"/>
+    <bean id="abstractLookupBean" class="ch3.AbstractLookupDemoBean">
+        <lookup-method name="getMySinger" bean="singer"/>
+    </bean>
+    <bean id="standardLookupBean" class="ch3.StandardLookupDemoBean">
+        <property name="mySinger" ref="singer"/>
+    </bean>
+
+    <bean id="methodReplacer" class="ch3.FormatMessageReplacer"/>
+    <bean id="replacementTarget" class="ch3.ReplacementTarget">
+        <replaced-method name="formatMessage" replacer="methodReplacer">
+            <arg-type>String</arg-type>
+        </replaced-method>
+    </bean>
+    <bean id="standardTarget" class="ch3.ReplacementTarget"/>
 </beans>
