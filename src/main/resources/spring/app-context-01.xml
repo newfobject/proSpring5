@@ -6,4 +6,7 @@
     <bean id="string1" class="java.lang.String"/>
     <bean name="spring2" class="java.lang.String"/>
     <bean class="java.lang.String"/>
+    <bean id="johnMayer" class="ch3.xml.Singer"
+          depends-on="gopher"/>
+    <bean id="gopher" class="ch3.xml.Guitar"/>
 </beans>
