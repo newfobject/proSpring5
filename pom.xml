@@ -6,7 +6,11 @@
 
     <groupId>chekalov-av</groupId>
     <artifactId>learnSpring</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>chapter2</module>
+    </modules>
     <properties>
         <spring-version>5.0.5.RELEASE</spring-version>
     </properties>
