@@ -17,7 +17,7 @@ public class MessageSupportFactory {
         properties = new Properties();
 
         try {
-            properties.load(this.getClass().getResourceAsStream("./msf.properties"));
+            properties.load(this.getClass().getResourceAsStream("/msf.properties"));
 
             String rendererClass = properties.getProperty("renderer.class");
             String providerClass = properties.getProperty("provider.class");
