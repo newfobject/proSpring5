@@ -12,11 +12,11 @@ public class StandartOutMessageRenderer implements MessageRenderer {
         System.out.println(messageProvider.getMessage());
     }
 
-    public MessageProvider getMessageProvider() {
-        return this.messageProvider;
-    }
-
     public void setMessageProvider(MessageProvider provider) {
         this.messageProvider = provider;
+    }
+
+    public MessageProvider getMessageProvider() {
+        return this.messageProvider;
     }
 }
