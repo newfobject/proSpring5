@@ -48,5 +48,7 @@
           class="ch4.DestructiveBeanWithInterface"
           p:filePath="#{systemProperties['java.io.tmpdir']}#{systemProperties['file.separator']}test.txt"/>
 
+    <bean id="johnMayer" class="ch4.NamedSinger"/>
+
 
 </beans>

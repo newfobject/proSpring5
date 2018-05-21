@@ -28,7 +28,13 @@
           init-method="init"
           p:name="John Butler"/>
 
-    <bean id="destructiveBean"
+    <bean id="destructiveBeanJSR250"
           class="ch4.DestructiveBeanWithJSR250"
           p:filePath="#{systemProperties['java.io.tmpdir']}#{systemProperties['file.separator']}test.txt"/>
+
+    <bean id="destructiveBeanWithInterface2"
+          class="ch4.DestructiveBeanWithInterface2"
+          p:filePath="#{systemProperties['java.io.tmpdir']}#{systemProperties['file.separator']}test2.txt"/>
+
+    <bean id="shutdownHook" class="ch4.ShutdownHookBean"/>
 </beans>
