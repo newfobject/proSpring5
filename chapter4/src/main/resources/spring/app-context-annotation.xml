@@ -27,4 +27,8 @@
           class="ch4.SingerWithJSR250"
           init-method="init"
           p:name="John Butler"/>
+
+    <bean id="destructiveBean"
+          class="ch4.DestructiveBeanWithJSR250"
+          p:filePath="#{systemProperties['java.io.tmpdir']}#{systemProperties['file.separator']}test.txt"/>
 </beans>

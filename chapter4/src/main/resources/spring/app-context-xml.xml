@@ -39,5 +39,14 @@
           class="ch4.SingerWithInterface"
           p:name="John Butler"/>
 
+    <bean id="destructiveBean"
+          class="ch4.DestructiveBean"
+          destroy-method="destroy"
+          p:filePath="#{systemProperties['java.io.tmpdir']}#{systemProperties['file.separator']}test.txt"/>
+
+    <bean id="destructiveBeanI"
+          class="ch4.DestructiveBeanWithInterface"
+          p:filePath="#{systemProperties['java.io.tmpdir']}#{systemProperties['file.separator']}test.txt"/>
+
 
 </beans>
