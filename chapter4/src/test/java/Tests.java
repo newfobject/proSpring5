@@ -1,6 +1,7 @@
 import ch4.*;
 import ch4.config.DestructiveBeanConfigDemo;
 import ch4.config.DestructiveBeanWithHook;
+import ch4.config.MessageDigesterDemo;
 import ch4.config.SingerConfigDemo;
 import org.junit.Test;
 
@@ -20,5 +21,8 @@ public class Tests {
         DestructiveBeanConfigDemo.main(args);
         DestructiveBeanWithHook.main(args);
         SingerConfigDemo.main(args);
+        MessageDigestDemo.main(args);
+        MessageDigesterDemo.main(args);
+        AccessingFactoryBeans.main(args);
     }
 }
