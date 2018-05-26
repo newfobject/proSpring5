@@ -62,4 +62,24 @@
           p:digest1-ref="shaDigest"
           p:digest2-ref="defaultDigest"/>
 
+    <bean id="shaDigestFactory"
+          class="ch4.MessageDigestFactory"
+          p:algorithmName="SHA1"/>
+
+    <bean id="defaultDigestFactory"
+          class="ch4.MessageDigestFactory"/>
+
+    <bean id="shaDigestFactoryBean"
+          factory-bean="shaDigestFactory"
+          factory-method="createInstance"/>
+
+    <bean id="defaultDigestFactoryBean"
+          factory-bean="defaultDigestFactory"
+          factory-method="createInstance"/>
+
+    <bean id="digesterFactoryBean"
+          class="ch4.MessageDigester"
+          p:digest1-ref="shaDigestFactoryBean"
+          p:digest2-ref="defaultDigestFactoryBean"/>
+
 </beans>

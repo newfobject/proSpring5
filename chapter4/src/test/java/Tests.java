@@ -3,12 +3,13 @@ import ch4.config.DestructiveBeanConfigDemo;
 import ch4.config.DestructiveBeanWithHook;
 import ch4.config.MessageDigesterDemo;
 import ch4.config.SingerConfigDemo;
+import ch4.custom.CustomEditorExample;
 import org.junit.Test;
 
 public class Tests {
 
     @Test
-    public void run() {
+    public void run() throws Exception {
         String[] args = {};
         DestructiveBean.main(args);
         DestructiveBeanWithInterface.main(args);
@@ -24,5 +25,8 @@ public class Tests {
         MessageDigestDemo.main(args);
         MessageDigesterDemo.main(args);
         AccessingFactoryBeans.main(args);
+        MessageDigestFactoryDemo.main(args);
+        PropertyEditorBean.main(args);
+        CustomEditorExample.main(args);
     }
 }
