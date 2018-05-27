@@ -28,5 +28,12 @@ public class Tests {
         MessageDigestFactoryDemo.main(args);
         PropertyEditorBean.main(args);
         CustomEditorExample.main(args);
+        MessageSourceDemo.main(args);
+        Publisher.main(args);
+        ResourceDemo.main(args);
+        JavaConfigXmlExample.main(args);
+        JavaConfigExampleOne.main(args);
+        JavaConfigSimpleExample.main(args);
+        JavaConfigExampleTwo.main(args);
     }
 }

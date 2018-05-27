@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p" xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:c="http://www.springframework.org/schema/c" xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd"
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
        default-lazy-init="true">
     <!--default-init-method="init"-->
 
@@ -81,5 +82,28 @@
           class="ch4.MessageDigester"
           p:digest1-ref="shaDigestFactoryBean"
           p:digest2-ref="defaultDigestFactoryBean"/>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource"
+          p:basenames-ref="basenames"/>
+
+    <util:list id="basenames">
+        <value>buttons</value>
+        <value>labels</value>
+    </util:list>
+
+    <bean id="publisher"
+          class="ch4.Publisher"/>
+
+    <bean id="messageEventListener"
+          class="ch4.MessageEventListener"/>
+
+    <bean id="messageRenderer"
+          class="ch2.StandardOutMessageRenderer"
+          p:messageProvider-ref="messageProvider"/>
+
+    <bean id="messageProvider"
+          class="ch3.xml.ConfigurableMessageProvider"
+          c:message="This is a configurable message"/>
 
 </beans>
