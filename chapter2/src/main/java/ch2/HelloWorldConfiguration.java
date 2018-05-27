@@ -15,7 +15,7 @@ public class HelloWorldConfiguration {
     // equivalent to <bean id="renderer" class=".."/>
     @Bean
     public MessageRenderer renderer() {
-        MessageRenderer renderer = new StandartOutMessageRenderer();
+        MessageRenderer renderer = new StandardOutMessageRenderer();
         renderer.setMessageProvider(provider());
         return renderer;
     }

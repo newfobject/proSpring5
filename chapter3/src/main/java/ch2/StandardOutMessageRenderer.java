@@ -1,6 +1,6 @@
 package ch2;
 
-public class StandartOutMessageRenderer implements MessageRenderer {
+public class StandardOutMessageRenderer implements MessageRenderer {
 
     private MessageProvider messageProvider;
 
