@@ -1,8 +1,5 @@
 import ch4.*;
-import ch4.config.DestructiveBeanConfigDemo;
-import ch4.config.DestructiveBeanWithHook;
-import ch4.config.MessageDigesterDemo;
-import ch4.config.SingerConfigDemo;
+import ch4.config.*;
 import ch4.custom.CustomEditorExample;
 import org.junit.Test;
 
@@ -35,5 +32,8 @@ public class Tests {
         JavaConfigExampleOne.main(args);
         JavaConfigSimpleExample.main(args);
         JavaConfigExampleTwo.main(args);
+        JavaConfigExampleThree.main(args);
+        ProfileXmlConfigExample.main(args);
+        ProfileJavaConfigExample.main(args);
     }
 }
