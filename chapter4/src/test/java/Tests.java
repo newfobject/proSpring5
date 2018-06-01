@@ -35,5 +35,7 @@ public class Tests {
         JavaConfigExampleThree.main(args);
         ProfileXmlConfigExample.main(args);
         ProfileJavaConfigExample.main(args);
+        EnvironmentSample.main(args);
+        PlaceHolderDemo.main(args);
     }
 }
