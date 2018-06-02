@@ -9,6 +9,7 @@
        default-lazy-init="true">
 
     <context:annotation-config/>
+    <context:component-scan base-package="ch4.jsr330"/>
 
     <bean id="singerOne"
           class="ch4.SingerWithJSR250"
@@ -37,4 +38,8 @@
           p:filePath="#{systemProperties['java.io.tmpdir']}#{systemProperties['file.separator']}test2.txt"/>
 
     <bean id="shutdownHook" class="ch4.ShutdownHookBean"/>
+
+    <bean id="message" class="java.lang.String">
+        <constructor-arg value="Gravity is working against me"/>
+    </bean>
 </beans>

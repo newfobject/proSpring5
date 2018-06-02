@@ -1,6 +1,7 @@
 import ch4.*;
 import ch4.config.*;
 import ch4.custom.CustomEditorExample;
+import ch4.jsr330.Jsr330Demo;
 import org.junit.Test;
 
 public class Tests {
@@ -37,5 +38,7 @@ public class Tests {
         ProfileJavaConfigExample.main(args);
         EnvironmentSample.main(args);
         PlaceHolderDemo.main(args);
+        Jsr330Demo.main(args);
+        GroovyBeansFromJava.main(args);
     }
 }
