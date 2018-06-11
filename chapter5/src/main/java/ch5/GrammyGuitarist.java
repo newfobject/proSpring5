@@ -3,23 +3,23 @@ package ch5;
 import ch2.common.Guitar;
 import ch2.common.Singer;
 
-public class Guitarist implements Singer {
+public class GrammyGuitarist implements Singer {
 
     @Override
     public void sing() {
-        System.out.println("Just keep me where the light is");
+        System.out.println("sing: Gravity is working against me\n" +
+                "And gravity wants to bring me down");
     }
 
-    @AdviceRequired
     public void sing(Guitar guitar) {
         System.out.println("play: " + guitar.play());
     }
 
-    public void sing2() {
-        System.out.println("Oh gravity, stay the hell away from me");
-    }
-
     public void rest() {
         System.out.println("zzz");
+    }
+
+    public void talk() {
+        System.out.println("talk");
     }
 }
