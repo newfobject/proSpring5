@@ -2,7 +2,10 @@ package ch5;
 
 import ch2.common.Guitar;
 import ch2.common.Singer;
+import org.springframework.stereotype.Component;
 
+
+@Component("johnMayer")
 public class GrammyGuitarist implements Singer {
 
     @Override
