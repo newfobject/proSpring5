@@ -15,6 +15,7 @@
         <module>chapter4SpringBoot</module>
         <module>chapter5</module>
         <module>chapter6</module>
+        <module>chapter7</module>
     </modules>
     <properties>
         <spring-version>5.0.5.RELEASE</spring-version>
