@@ -1,13 +1,25 @@
 package ch7.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "singer")
-public class Singer {
+@NamedQueries({
+        @NamedQuery(name = "Singer.findById",
+                query = "select distinct s from Singer s " +
+                        "left join fetch s.albums a " +
+                        "left join fetch s.instruments i " +
+                        "WHERE s.id = :id"),
+        @NamedQuery(name = "Singer.findAllWithAlbum",
+                query = "select distinct s from Singer s " +
+                        "left join fetch s.albums a " +
+                        "left join fetch s.instruments i")
+})
+public class Singer implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
