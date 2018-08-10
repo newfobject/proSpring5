@@ -16,6 +16,7 @@
         <module>chapter5</module>
         <module>chapter6</module>
         <module>chapter7</module>
+        <module>chapter8</module>
     </modules>
     <properties>
         <spring-version>5.0.5.RELEASE</spring-version>
@@ -43,6 +44,12 @@
             <artifactId>junit</artifactId>
             <version>RELEASE</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
