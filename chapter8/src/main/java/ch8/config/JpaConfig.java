@@ -29,7 +29,7 @@ public class JpaConfig {
         try {
             return new EmbeddedDatabaseBuilder()
                     .setType(EmbeddedDatabaseType.H2)
-                    .addScripts("classpath:db/schema.sql", "classpath:db/test-data.sql")
+                    .addScripts("classpath:sql/schema.sql", "classpath:sql/data.sql")
                     .build();
         } catch (Exception e) {
             logger.error("Embedded DataSource bean cannot be created!", e);
@@ -40,6 +40,18 @@ public class JpaConfig {
     @Bean
     public PlatformTransactionManager transactionManager() {
         return new JpaTransactionManager(entityManagerFactory());
+    }
+
+    @Bean
+    public EntityManagerFactory entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean factoryBean =
+                new LocalContainerEntityManagerFactoryBean();
+        factoryBean.setPackagesToScan("ch8.entities");
+        factoryBean.setDataSource(dataSource());
+        factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
+        factoryBean.setJpaProperties(hibernateProperties());
+        factoryBean.afterPropertiesSet();
+        return factoryBean.getNativeEntityManagerFactory();
     }
 
     @Bean
@@ -58,18 +70,6 @@ public class JpaConfig {
         hibernateProp.put("hibernate.jdbc.batch_size", 10);
         hibernateProp.put("hibernate.jdbc.fetch_size", 50);
         return hibernateProp;
-    }
-
-    @Bean
-    public EntityManagerFactory entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean factoryBean =
-                new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setPackagesToScan("ch8.entities");
-        factoryBean.setDataSource(dataSource());
-        factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
-        factoryBean.setJpaProperties(hibernateProperties());
-        factoryBean.afterPropertiesSet();
-        return factoryBean.getNativeEntityManagerFactory();
     }
 
 }

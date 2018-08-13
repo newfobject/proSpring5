@@ -20,6 +20,7 @@
     </modules>
     <properties>
         <spring-version>5.0.5.RELEASE</spring-version>
+        <hibernateVesion>5.2.10.Final</hibernateVesion>
     </properties>
 
     <dependencies>
@@ -49,6 +50,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
