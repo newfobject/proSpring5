@@ -1,36 +1,36 @@
 package ch8.service;
 
+import ch8.SingerRepository;
 import ch8.entities.Singer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
+import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Service("jpaSingerService")
-@Repository
+@Service("springJpaSingerService")
 @Transactional
 public class SingerServiceImpl implements SingerService {
 
-    final static String ALL_SINGER_NATIVE_QUERY =
-            "select id, first_name, last_name, birth_date, version from singer";
-
-    private static Logger logger =
-            LoggerFactory.getLogger(SingerServiceImpl.class);
-
-    @PersistenceContext
-    private EntityManager em;
-
+    @Autowired
+    private SingerRepository singerRepository;
 
     @Transactional(readOnly = true)
     @Override
     public List<Singer> findAll() {
-        return em.createNamedQuery(Singer.FIND_ALL, Singer.class).getResultList();
+        return Lists.newArrayList(singerRepository.findAll());
+    }
+
+    @Override
+    public List<Singer> findByFirstName(String firstName) {
+        return singerRepository.findByFirstName(firstName);
+    }
+
+    @Override
+    public List<Singer> findByFirstNameAndLastName(String firstName, String lastName) {
+        return singerRepository.findByFirstNameAndLastName(firstName, lastName);
     }
 
     @Transactional(readOnly = true)
