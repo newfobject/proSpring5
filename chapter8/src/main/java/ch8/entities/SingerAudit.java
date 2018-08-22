@@ -1,5 +1,6 @@
 package ch8.entities;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "singer_audit")
+@Audited
 public class SingerAudit extends AuditableEntity<SingerAudit> {
 
     @Id
@@ -59,11 +61,18 @@ public class SingerAudit extends AuditableEntity<SingerAudit> {
         this.birthDate = birthDate;
     }
 
+    @Override
     public String toString() {
-        return "Singer - Id: " + id + ", First name: " + firstName
-                + ", Last name: " + lastName + ", Birthday: " + birthDate
-                + ", Created by: " + createdBy + ", Create date: " + createdDate
-                + ", Modified by: " + lastModifiedBy + ", Modified date: "
-                + lastModifiedDate;
+        return "SingerAudit{" +
+                "id=" + id +
+                ", version=" + version +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                ", createdDate=" + createdDate +
+                ", createdBy='" + createdBy + '\'' +
+                ", lastModifiedBy='" + lastModifiedBy + '\'' +
+                ", lastModifiedDate=" + lastModifiedDate +
+                '}';
     }
 }

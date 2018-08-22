@@ -65,6 +65,11 @@
             <artifactId>guava</artifactId>
             <version>26.0-jre</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+            <version>${hibernateVesion}</version>
+        </dependency>
     </dependencies>
 
 </project>

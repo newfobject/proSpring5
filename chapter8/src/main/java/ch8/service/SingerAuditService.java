@@ -10,4 +10,6 @@ public interface SingerAuditService {
     SingerAudit findById(Long id);
 
     SingerAudit save(SingerAudit singerAudit);
+
+    SingerAudit findAuditByRevision(Long id, int revision);
 }
