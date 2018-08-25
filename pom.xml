@@ -17,6 +17,7 @@
         <module>chapter6</module>
         <module>chapter7</module>
         <module>chapter8</module>
+        <module>chapter9</module>
     </modules>
     <properties>
         <spring-version>5.0.5.RELEASE</spring-version>
@@ -62,6 +63,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
             <version>${spring-version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>26.0-jre</version>
         </dependency>
     </dependencies>
 
