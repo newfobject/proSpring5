@@ -14,8 +14,8 @@ import static javax.persistence.GenerationType.IDENTITY;
         @NamedQuery(name = Singer.COUNT_ALL, query = "select count(s) from Singer s")
 })
 public class Singer {
-    static final String FIND_ALL = "Singer.findAll";
-    static final String COUNT_ALL = "Singer.count";
+    public static final String FIND_ALL = "Singer.findAll";
+    public static final String COUNT_ALL = "Singer.count";
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -90,7 +90,6 @@ public class Singer {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", birthDate=" + birthDate +
-                ", albums=" + albums +
                 '}';
     }
 }

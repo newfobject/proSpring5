@@ -1,42 +1,36 @@
 package ch9;
 
-import ch9.config.DataJPAConfig;
-import ch9.config.ServicesConfig;
 import ch9.entities.Album;
 import ch9.entities.Singer;
 import ch9.services.SingerService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 
-public class TxAnnotationDemo {
+public class TxDeclarativeDemo {
     public static void main(String[] args) {
-        GenericApplicationContext context =
-                new AnnotationConfigApplicationContext(ServicesConfig.class, DataJPAConfig.class);
-        SingerService singerService = context.getBean(SingerService.class);
+        GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+        ctx.load("classpath:spring/aop-transaction.xml");
+        ctx.refresh();
+
+        SingerService singerService = ctx.getBean(SingerService.class);
+
+        singerService.save(initializeSinger());
 
         List<Singer> singers = singerService.findAll();
         singers.forEach(System.out::println);
 
-        singerService.save(initializeSinger());
-
         Singer singer = singerService.findById(1L);
         singer.setFirstName("John Clayton");
-        singer.setLastName("His last name");
         singerService.save(singer);
+        System.out.println("Singer save successfully: " + singer);
 
-        singer = singerService.findById(1L);
-        System.out.println("Singer version: " + singer.getVersion());
+        System.out.println("Singer count: " + singerService.countAll());
 
-        System.out.println("Singer saved!");
-
-        System.out.println("Total items: " + singerService.countAll());
-
-        context.close();
+        ctx.close();
     }
 
     private static Singer initializeSinger() {
@@ -54,4 +48,5 @@ public class TxAnnotationDemo {
         singer.setAlbums(albums);
         return singer;
     }
+
 }

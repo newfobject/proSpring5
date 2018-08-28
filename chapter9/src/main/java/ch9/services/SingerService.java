@@ -10,4 +10,6 @@ public interface SingerService {
     Singer findById(Long id);
 
     Singer save(Singer singer);
+
+    long countAll();
 }
