@@ -1,16 +1,15 @@
 package ch10.config;
 
 import ch10.Singer;
+import ch10.SingerToAnotherSinger;
 import ch10.StringToDateTimeConverter;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import java.net.URL;
 import java.util.HashSet;
@@ -18,7 +17,11 @@ import java.util.Set;
 
 @PropertySource("classpath:application.properties")
 @Configuration
-@ComponentScan(basePackages = "ch10")
+@ComponentScan(
+        basePackages = "ch10",
+        excludeFilters = @ComponentScan.Filter(
+                type = FilterType.ASSIGNABLE_TYPE,
+                classes = AppConfig2.class))
 public class AppConfig {
 
     @Value("${date.format.pattern}")
@@ -27,6 +30,11 @@ public class AppConfig {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    LocalValidatorFactoryBean validatorFactoryBean() {
+        return new LocalValidatorFactoryBean();
     }
 
     @Bean
@@ -48,6 +56,7 @@ public class AppConfig {
                 new ConversionServiceFactoryBean();
         Set<Converter> converters = new HashSet<>();
         converters.add(converter());
+        converters.add(singerToAnotherSinger());
         conversionServiceFactoryBean.setConverters(converters);
         conversionServiceFactoryBean.afterPropertiesSet();
         return conversionServiceFactoryBean;
@@ -59,5 +68,10 @@ public class AppConfig {
         converter.setDatePattern(dateFormatPattern);
         converter.init();
         return converter;
+    }
+
+    @Bean
+    SingerToAnotherSinger singerToAnotherSinger() {
+        return new SingerToAnotherSinger();
     }
 }
