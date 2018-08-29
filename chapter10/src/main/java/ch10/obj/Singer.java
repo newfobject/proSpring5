@@ -1,8 +1,10 @@
 package ch10.obj;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+//@CheckCountrySinger
 public class Singer {
     @NotNull
     @Size(min = 2, max = 60)
@@ -42,5 +44,15 @@ public class Singer {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    @AssertTrue(message = "ERROR! Individual customer should have " +
+            "gender and last name defined")
+    public boolean isCountrySinger() {
+        boolean result = true;
+        if (genre.equals(Genre.COUNTRY) && (gender == null || lastName == null)) {
+            result = false;
+        }
+        return result;
     }
 }
