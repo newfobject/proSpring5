@@ -19,6 +19,7 @@
         <module>chapter8</module>
         <module>chapter9</module>
         <module>chapter10</module>
+        <module>chapter11</module>
     </modules>
     <properties>
         <spring-version>5.0.5.RELEASE</spring-version>
@@ -70,6 +71,22 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>26.0-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernateVesion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.196</version>
         </dependency>
     </dependencies>
 
