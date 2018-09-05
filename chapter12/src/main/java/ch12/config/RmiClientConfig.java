@@ -8,7 +8,7 @@ import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 @Configuration
 public class RmiClientConfig {
 
-    @Bean
+    @Bean("invokerService")
     public SingerService singerService() {
         HttpInvokerProxyFactoryBean factoryBean = new HttpInvokerProxyFactoryBean();
         factoryBean.setServiceInterface(SingerService.class);
