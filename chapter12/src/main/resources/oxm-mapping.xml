@@ -1,5 +1,5 @@
 <mapping>
-    <class name="ch12.Singers">
+    <class name="ch13.Singers">
         <field name="singers"
                type="ch12.entities.Singer"
                collection="arraylist">
