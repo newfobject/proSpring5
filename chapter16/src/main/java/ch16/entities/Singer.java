@@ -33,7 +33,7 @@ public class Singer implements Serializable {
     @Basic(fetch = FetchType.LAZY)
     @Lob
     @Column(name = "PHOTO")
-    private byte photo;
+    private byte[] photo;
 
     public Long getId() {
         return id;
@@ -83,11 +83,11 @@ public class Singer implements Serializable {
         this.description = description;
     }
 
-    public byte getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 
