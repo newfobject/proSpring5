@@ -69,7 +69,34 @@ public class SingerController {
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("singer", singerService.findById(id));
-        return "singer/update";
+        return "singers/update";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(@Valid Singer singer, BindingResult bindingResult,
+                         Model model, HttpServletRequest request,
+                         RedirectAttributes redirectAttributes, Locale locale) {
+        logger.info("Creating singer");
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("message", new Message("error",
+                    messageSource.getMessage("singer_save_fail", new Object[]{}, locale)));
+            model.addAttribute("singer", singer);
+            return "singers/create";
+        }
+        model.asMap().clear();
+
+        redirectAttributes.addFlashAttribute("message", new Message("success",
+                messageSource.getMessage("singer_save_success", new Object[]{}, locale)));
+        logger.info("Singer id: " + singer.getId());
+        singerService.save(singer);
+        return "redirect:/singers/";
+    }
+
+    @RequestMapping(params = "form", method = RequestMethod.GET)
+    public String createForm(Model model) {
+        Singer singer = new Singer();
+        model.addAttribute("singer", singer);
+        return "singers/create";
     }
 
     @Autowired
