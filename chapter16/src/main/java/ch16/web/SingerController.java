@@ -6,6 +6,7 @@ import ch16.services.SingerService;
 import ch16.util.Message;
 import ch16.util.UriUtil;
 import com.google.common.collect.Lists;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 
@@ -54,7 +58,8 @@ public class SingerController {
     public String update(@Valid Singer singer, BindingResult bindingResult,
                          Model model, HttpServletRequest request,
                          RedirectAttributes redirectAttributes, Locale locale,
-                         @PathVariable("id") Long id) {
+                         @PathVariable("id") Long id,
+                         @RequestParam(value = "file", required = false) Part file) {
         logger.info("Updating singer");
         if (bindingResult.hasErrors()) {
             model.addAttribute("message", new Message("error", messageSource.getMessage("singer_save_fail",
@@ -65,6 +70,9 @@ public class SingerController {
         model.asMap().clear();
         redirectAttributes.addFlashAttribute("message", new Message(
                 "success", messageSource.getMessage("singer_save_success", new Object[]{}, locale)));
+
+        setImage(singer, file);
+
         singerService.save(singer);
         return "redirect:/singers/" + UriUtil.encodePathSegment(singer.getId().toString(), request);
     }
@@ -78,7 +86,8 @@ public class SingerController {
     @RequestMapping(method = RequestMethod.POST)
     public String create(@Valid Singer singer, BindingResult bindingResult,
                          Model model, HttpServletRequest request,
-                         RedirectAttributes redirectAttributes, Locale locale) {
+                         RedirectAttributes redirectAttributes, Locale locale,
+                         @RequestParam(value = "file", required = false) Part file) {
         logger.info("Creating singer");
         if (bindingResult.hasErrors()) {
             model.addAttribute("message", new Message("error",
@@ -91,8 +100,23 @@ public class SingerController {
         redirectAttributes.addFlashAttribute("message", new Message("success",
                 messageSource.getMessage("singer_save_success", new Object[]{}, locale)));
         logger.info("Singer id: " + singer.getId());
+
+        setImage(singer, file);
+
         singerService.save(singer);
         return "redirect:/singers/";
+    }
+
+    @GetMapping(value = "/photo/{id}")
+    @ResponseBody
+    public byte[] downloadPhoto(@PathVariable("id") Long id) {
+        Singer singer = singerService.findById(id);
+
+        if (singer.getPhoto() != null) {
+            logger.info("Downloading photo for id: {} with size: {}", singer.getId(), singer.getPhoto().length);
+        }
+
+        return singer.getPhoto();
     }
 
     @RequestMapping(params = "form", method = RequestMethod.GET)
@@ -152,5 +176,23 @@ public class SingerController {
     @Autowired
     public void setMessageSource(MessageSource messageSource) {
         this.messageSource = messageSource;
+    }
+
+    private void setImage(Singer singer, Part file) {
+        logger.info("File name: " + file.getName());
+        logger.info("File size: " + file.getSize());
+        logger.info("File content type: " + file.getContentType());
+        byte[] fileContent = null;
+
+        try {
+            InputStream inputStream = file.getInputStream();
+            if (inputStream == null)
+                logger.info("File inputstream is null");
+
+            fileContent = IOUtils.toByteArray(inputStream);
+            singer.setPhoto(fileContent);
+        } catch (IOException e) {
+            logger.error("Error saving uploaded file");
+        }
     }
 }

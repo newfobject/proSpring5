@@ -1,12 +1,15 @@
 package ch16.config;
 
+import ch16.util.DateFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.ui.context.support.ResourceBundleThemeSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -22,6 +25,16 @@ import java.util.Locale;
 @EnableWebMvc
 @ComponentScan(basePackages = {"ch16"})
 public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(dateFormatter());
+    }
+
+    @Bean
+    public DateFormatter dateFormatter() {
+        return new DateFormatter();
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -104,6 +117,12 @@ public class WebConfig implements WebMvcConfigurer {
         cookieThemeResolver.setCookieMaxAge(3600);
         cookieThemeResolver.setCookieName("theme");
         return cookieThemeResolver;
+    }
+
+
+    @Bean
+    public StandardServletMultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
     }
 
     @Bean
