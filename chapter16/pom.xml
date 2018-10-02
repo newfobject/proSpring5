@@ -48,6 +48,11 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.codehaus.castor</groupId>
             <artifactId>castor-xml</artifactId>
             <version>1.4.1</version>
@@ -81,5 +86,5 @@
             <version>2.9.7</version>
         </dependency>
     </dependencies>
-    <!--723-->
+    <!--731-->
 </project>
